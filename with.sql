@@ -1,18 +1,18 @@
 CREATE TABLE office (
-  officeid NUMBER(2) CONSTRAINT PK_DEPT PRIMARY KEY,
+  officeid NUMBER(2) CONSTRAINT PK_officeid PRIMARY KEY,
   name VARCHAR2(14),
   city VARCHAR2(13)
 ) ;
 
 CREATE TABLE employee (
-  empid NUMBER(4) CONSTRAINT PK_EMP PRIMARY KEY,
+  empid NUMBER(4) CONSTRAINT PK_employee PRIMARY KEY,
   name VARCHAR2(10),
   position VARCHAR2(9),
   managerid NUMBER(4),
   hiredate DATE,
   salary NUMBER(7,2),
   bonus NUMBER(7,2),
-  officeid NUMBER(2) CONSTRAINT FK_DEPTNO REFERENCES DEPT
+  officeid NUMBER(2) CONSTRAINT FK_officeid REFERENCES DEPT
 );
 
 INSERT INTO office VALUES (10,'Mobile','Plano');
