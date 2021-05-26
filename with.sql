@@ -12,7 +12,7 @@ CREATE TABLE employee (
   hiredate DATE,
   salary NUMBER(7,2),
   bonus NUMBER(7,2),
-  officeid NUMBER(2) CONSTRAINT FK_officeid REFERENCES DEPT
+  officeid NUMBER(2) CONSTRAINT FK_officeid REFERENCES office
 );
 
 INSERT INTO office VALUES (10,'Mobile','Plano');
