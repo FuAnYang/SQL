@@ -43,3 +43,16 @@ WHERE p.is_clean_title = 1 AND c.price =
                                        WHERE c1.power = c.power AND p1.mileage_range = p.mileage_range )
 ORDER BY POWER DESC, AGE DESC
 
+///////////////////////////////////////////////////*Version 3*///////////////////////////////////////////////////////
+
+WITH mi AS 
+(SELECT power, mileage_range, MIN(price) aa FROM cars c JOIN cars_property p ON c.code=p.code 
+ WHERE is_clean_title=1 GROUP BY power, mileage_range),jt AS 
+(SELECT vin, power, mileage_range, price FROM cars c1 JOIN cars_property p1 ON c1.code=p1.code 
+ WHERE is_clean_title=1) 
+
+SELECT vin, mi.mileage_range, price, mi.power FROM 
+mi, jt WHERE mi.mileage_range=jt.mileage_range AND mi.power=jt.power AND mi.aa=jt.price
+ORDER BY power DESC, mileage_range DESC;
+
+
