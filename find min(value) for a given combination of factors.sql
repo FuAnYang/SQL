@@ -12,7 +12,7 @@ CREATE TABLE cars_property (
 );
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Question: Look for the cheapest clean title car for a given combination of mileage_range and power in used car markets
 
 Step1: Join tables to get master table with all the info
@@ -20,7 +20,7 @@ Step2: Filter out not clean title cars
 Step3: Group by mileage_range and power, find the lowest price for a given combination of power and mileage_range
 Step4: Create a new view based on the above table and keep only cheapest cars at given combination of power and mileage_range
 Step5: Order new list by decending order of power and ascending order of mileage_range
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////*Version 1*///////////////////////////////////////////////////////
 
 SELECT vin, price, mileage_range, power
 FROM
@@ -32,4 +32,14 @@ WHERE price=miniprice
 ORDER BY power DESC, mileage_range ASC
 ;
 
+///////////////////////////////////////////////////*Version 2*///////////////////////////////////////////////////////
+
+SELECT vin, price, mileage_range, power 
+FROM 
+    cars c JOIN cars_property p ON c.code = p.code 
+WHERE p.is_clean_title = 1 AND c.price = 
+                                      (SELECT MIN(price) FROM cars c1 
+                                       JOIN cars_property p1 ON (w1.code = p1.code) 
+                                       WHERE c1.power = c.power AND p1.mileage_range = p.mileage_range )
+ORDER BY POWER DESC, AGE DESC
 
