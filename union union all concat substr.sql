@@ -36,6 +36,7 @@ There are a total of 2 actors.
 There are a total of 2 doctors.
 There are a total of 3 journalists.
 There are a total of 3 singers.
+
 //////////////////////////////////////////////////* Version 1*/////////////////////////////////////////////////////////////////////////
 In oracle, CONCAT() can only concat two arguments at once, if CONCAT('X','Y','Z'), it will throw an error
 
@@ -59,6 +60,7 @@ FROM occupation
 UNION 
 SELECT 'There are a total of ' ||  COUNT(*) || ' ' || LOWER(occupation) ||'s.'  
 FROM occupations GROUP BY occupation;
+
 
 //////////////////////////////////////////////////* Version 4*/////////////////////////////////////////////////////////////////////////
 View two queries as two tables with same schema (same column# and column names), use UNION ALL to append the two results of two queries 
