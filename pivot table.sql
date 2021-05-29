@@ -12,7 +12,9 @@ INSERT INTO occupations VALUES ('Ketty','Professor');
 INSERT INTO occupations VALUES ('Christeen','Professor');
 INSERT INTO occupations VALUES ('Jane','Actor');
 INSERT INTO occupations VALUES ('Jenny','Doctor');
+INSERT INTO occupations VALUES ('Allen','Singer');
 INSERT INTO occupations VALUES ('Priya','Singer');
+INSERT INTO occupations VALUES ('Jackson','Singer');
 
 
 Question: Rearrange occupations table from tablue form to pivot form
@@ -21,13 +23,15 @@ Name        Occupation
 Samantha    Doctor                                                          
 Julia       Actor                                  
 Maria       Actor                             Doctor      Professor     Singer     Actor
-Meera       Singer                            Jenny       Ashley        Meera      Jane
-Ashely      Professor       ------------>     Samantha    Christeen     Priya      Julia 
-Ketty       Professor                         Null        Ketty         Null       Maria                                                                                             
-Christeen   Professor                                                                                                                                                                                            
-Jane        Actor
-Jenny       Doctor                                                                                                                                              
+Meera       Singer                            Jenny       Ashley        Allen      Jane
+Ashely      Professor       ------------>     Samantha    Christeen     Jackson    Julia 
+Ketty       Professor                         Null        Ketty         Meera      Maria                                                                                             
+Christeen   Professor                         Null        Null          Priya      Null                                                                                                                                                                   
+Jane        Actor                            
+Jenny       Doctor   
+Allen       Singer
 Priya       Singer
+Jackson     Singer
 
 
 /*Solution 1 */
@@ -40,6 +44,62 @@ FROM (
   )
 ORDER BY rn
 );
+
+Steps break down:
+Jane        Actor     1                                                         
+Julia       Actor     2                  
+Jenny       Doctor    1
+Samantha    Doctor    2
+Ashely      Professor 1      
+Ketty       Professor 2                                                                                                                 
+Christeen   Professor 3                                                                                                                                                                                           
+Allen       Singer    1                                                                                                                                          
+Jackson     Singer    2
+Meera       Singer    3                                                                                                                                          
+Priya       Singer    4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Eve Actor 1
+Jennifer Actor 2
+Ketty Actor 3
+Samantha Actor 4
+Aamina Doctor 1
+Julia Doctor 2
+Priya Doctor 3
+Ashley Professor 1
+Belvet Professor 2
+Britney Professor 3
+Maria Professor 4
+Meera Professor 5
+Naomi Professor 6
+Priyanka Professor 7
+Christeen Singer 1
+Jane Singer 2
+Jenny Singer 3
+Kristeen Singer 4
+
+
+
+
+
+
+
+
 
 
 
@@ -75,6 +135,7 @@ GROUP BY rn
 ORDER BY rn;
 
       
+
 
 
 
