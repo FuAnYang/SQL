@@ -36,9 +36,9 @@ INSERT INTO employee VALUES (3117,'Paul','Logistics Coordinator',3108,to_date('5
 INSERT INTO employee VALUES (3118,'Edward','Logistics Coordinator',3108,to_date('10-10-2018','dd-mm-yyyy'),900,NULL,10);
 
 
---1. For each employee, find out total number of people who work in the same office
-///////////////////////////////////*verson 1 *///////////////////////////////////////////
+Question 1: For each employee, find out total number of people who work in the same office
 
+/* Solution 1*/
 SELECT e.name,
        oc.office_count AS emp_office_count
 FROM   employee e 
@@ -46,9 +46,10 @@ FROM   employee e
              FROM   employee
              GROUP BY officeid) oc
         ON e.officeid = oc.officeid;
-        
-///////////////////////////////////*verson 2 *///////////////////////////////////////////
-
+   
+   
+   
+/* Solution 2*/
 WITH office_count AS
 (SELECT officeid, count(*)
   FROM employee
@@ -59,9 +60,10 @@ FROM employee e
      ON e.officeid=dc.officeid;
   
   
---2. For each employee, find out total number of people who work in the same office as his/her manager
-///////////////////////////////////*verson 1 *///////////////////////////////////////////
+  
+Question 2: For each employee, find out total number of people who work in the same office as his/her manager
 
+/* Solution 1*/
 SELECT e.name, e.empid, eoc.count(*) manager_office_count
 FROM employee e
 JOIN employee m 
@@ -71,8 +73,9 @@ JOIN (SELECT officeid, count(*)
       GROUP BY officeid) oc
 ON m.officeid=oc.officeid;
 
-///////////////////////////////////*verson 2 *///////////////////////////////////////////
 
+
+/* Solution 2*/
 WITH office_count AS
 (SELECT officeid, count(*) 
   FROM employee  
@@ -83,4 +86,14 @@ JOIN employee m
 ON e.managerid=m.empid
 JOIN office_count oc
 ON oc.officeid=m.officeid;
+
+
+
+
+
+
+
+
+
+
 
