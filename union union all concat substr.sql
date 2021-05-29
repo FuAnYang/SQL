@@ -37,21 +37,23 @@ There are a total of 2 doctors.
 There are a total of 3 journalists.
 There are a total of 3 singers.
 
-//////////////////////////////////////////////////* Version 1*/////////////////////////////////////////////////////////////////////////
+/* Version 1*/
 In oracle, CONCAT() can only concat two arguments at once, if CONCAT('X','Y','Z'), it will throw an error
 
 SELECT CONCAT(name,CONCAT('(',CONCAT(SUBSTR(occupation,1,1),')'))) FROM occupations;
 SELECT 'There are a total of ' ||  COUNT(*) || ' ' || LOWER(occupation) ||'s.'  FROM occupations GROUP BY occupation ORDER BY COUNT(*), occupation;
 
 
-//////////////////////////////////////////////////* Version 2*/////////////////////////////////////////////////////////////////////////
+
+/* Version 2*/
 It is recommended to use double piping || in replacement of CONCAT() when muptiple strings/characters needs to be concat
 
 SELECT name || '(' || SUBSTR(occupation,1,1) || ')' FROM occupations ORDER BY name;
 SELECT 'There are a total of ' ||  COUNT(*) || ' ' || LOWER(occupation) ||'s.'  FROM occupations GROUP BY occupation ORDER BY COUNT(*), occupation;
 
 
-//////////////////////////////////////////////////* Version 3*/////////////////////////////////////////////////////////////////////////
+
+/* Version 3*/
 Use UNION to combine the results of two querys, while using UNION, We cannot use Order By clause with individual Select statement.
 We can use it with result set generated from the Union of both Select statements.
 
@@ -62,7 +64,8 @@ SELECT 'There are a total of ' ||  COUNT(*) || ' ' || LOWER(occupation) ||'s.'
 FROM occupations GROUP BY occupation;
 
 
-//////////////////////////////////////////////////* Version 4*/////////////////////////////////////////////////////////////////////////
+
+/* Version 4*/
 View two queries as two tables with same schema (same column# and column names), use UNION ALL to append the two results of two queries 
 
 SELECT foo FROM(
