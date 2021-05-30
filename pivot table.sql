@@ -36,7 +36,6 @@ Jackson     Singer
 
 /*Solution 1 */
 WITH data AS ( SELECT name, occupation, ROW_NUMBER() OVER( PARTITION BY occupation ORDER BY name) AS rn FROM occupations)   
-  
 SELECT Doctor, Professor, Singer, Actor 
 FROM ( 
   SELECT * FROM data 
@@ -46,59 +45,19 @@ ORDER BY rn
 );
 
 Steps break down:
+
+/*WITH data AS*/                            /*SELECT * FROM data PIVOT(MIN(name)*/          /*SELECT Doctor, Professor, Singer, Actor FROM ORDER BY rn*/
 Jane        Actor     1                                                         
-Julia       Actor     2                  
-Jenny       Doctor    1
-Samantha    Doctor    2
-Ashely      Professor 1      
-Ketty       Professor 2                                                                                                                 
-Christeen   Professor 3                                                                                                                                                                                           
+Julia       Actor     2                   
+Jenny       Doctor    1                  Doctor      Professor     Singer     Actor            Doctor      Professor     Singer     Actor  
+Samantha    Doctor    2               1  Jenny       Ashley        Allen      Jane             Jenny       Ashley        Allen      Jane                                                                       
+Ashely      Professor 1     ------->  3  Null        Ketty         Meera      Maria  ------->  Samantha    Christeen     Jackson    Julia                                   
+Ketty       Professor 2               2  Samantha    Christeen     Jackson    Julia            Null        Ketty         Meera      Maria                                                                                     
+Christeen   Professor 3               4  Null        Null          Priya      Null             Null        Null          Priya      Null                                                                                                                                                                
 Allen       Singer    1                                                                                                                                          
-Jackson     Singer    2
+Jackson     Singer    2                                                         
 Meera       Singer    3                                                                                                                                          
-Priya       Singer    4
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Eve Actor 1
-Jennifer Actor 2
-Ketty Actor 3
-Samantha Actor 4
-Aamina Doctor 1
-Julia Doctor 2
-Priya Doctor 3
-Ashley Professor 1
-Belvet Professor 2
-Britney Professor 3
-Maria Professor 4
-Meera Professor 5
-Naomi Professor 6
-Priyanka Professor 7
-Christeen Singer 1
-Jane Singer 2
-Jenny Singer 3
-Kristeen Singer 4
-
-
-
-
-
-
-
+Priya       Singer    4                                             
 
 
 
@@ -134,7 +93,26 @@ FROM(
 GROUP BY rn
 ORDER BY rn;
 
+/*SELECT ROW_NUMBER() CASE WHEN FROM occupations*/    /*SELECT MAX(),MAX(),MAX(),MAX() FROM, GROUP BY*/       /*ORDER BY rn*/
+1  Jane      NULL   NULL      NULL  Actor                                                             
+2  Julia     NULL   NULL      NULL  Actor                       
+1  Jenny     Doctor NULL      NULL  NULL                Doctor      Professor     Singer     Actor           Doctor      Professor     Singer     Actor  
+2  Samantha  Doctor NULL      NULL  NULL                Jenny       Ashley        Allen      Jane            Jenny       Ashley        Allen      Jane                                                                       
+1  Ashely    Null   Professor Null  Null    ------->    Null        Ketty         Meera      Maria  ------>  Samantha    Christeen     Jackson    Julia                                   
+2  Ketty     Null   Professor Null  Null                Samantha    Christeen     Jackson    Julia           Null        Ketty         Meera      Maria                                                                                     
+3  Christeen Null   Professor Null  Null                Null        Null          Priya      Null            Null        Null          Priya      Null                                                                                                                                                                
+1  Allen     Null   NULL     Singer Null                                                                                                                                       
+2  Jackson   Null   NULL     Singer Null                                                             
+3  Meera     Null   NULL     Singer Null                                                                                                                                          
+4  Priya     Null   NULL     Singer Null
+
+
       
+
+
+
+
+
 
 
 
