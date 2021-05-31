@@ -22,7 +22,6 @@ ORDER BY p2.salary
 
 
 /* Solution 2*/
-
 SELECT s.name
 FROM (students s JOIN friends f USING(id)
       JOIN Packages p1 USING(id)
@@ -34,7 +33,6 @@ ORDER BY p2.salary
 
 
 /* Solution 3*/
-
 SELECT s.name FROM students s, friends f, packages p1, packages p2 
 WHERE s.id = f.id AND 
       s.id = p1.id AND 
@@ -62,6 +60,17 @@ USING output:
 ID  s.Name  f.Friend_ID  p1.Salary   p2.ID    p2.Salary
 2    Julia      4           15.6       4        18.8
 1     Samantha  3           15.5       3        16.7
+
+
+
+
+
+
+
+
+
+
+
 
 
 
